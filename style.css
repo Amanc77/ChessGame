@@ -25,11 +25,11 @@ body {
 }
 
 .white {
-  background-color: #f0d9b5;
+  background-color: #769656;
 }
 
 .black {
-  background-color: #b58863;
+  background-color: #eeeed2;
 }
 
 .coordinate {
@@ -45,16 +45,32 @@ body {
 }
 
 .whiteText {
-  color: #b58863;
+  color: #eeeed2;
+  scale: 1.1;
+  margin-top: 5px;
 }
 .blackText {
-  color: #f0d9b5;
+  color: #769656;
+
+  margin-top: 5px;
 }
 
 .rank {
   top: 4%;
   right: 4%;
   left: auto;
+}
+
+.piece {
+  size: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.piece img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 @media (min-width: 600px) {
@@ -65,6 +81,6 @@ body {
 }
 @media (min-width: 600px) {
   .coordinate {
-    font-size: 8px;
+    font-size: 10px;
   }
 }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess.com</title>
+    <!-- Light mode favicon -->
+    <link
+      rel="icon"
+      href="../chess.png"
+      media="(prefers-color-scheme: light)"
+      type="image/x-icon"
+    />
+
+    <!-- Dark mode favicon -->
+    <link
+      rel="icon"
+      href="../chess.png"
+      media="(prefers-color-scheme: dark)"
+      type="image/x-icon"
+    />
+
+    <!-- Default favicon for older browsers -->
+    <link rel="icon" href="../chess.png" type="image/x-icon" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .chessboard {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-rows: repeat(8, minmax(0, 1fr));
+        width: 400px;
+        height: 400px;
+        transform: rotate(0deg);
+      }
+
+      .piece.white {
+        color: white;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 1));
+      }
+
+      .piece.black {
+        color: black;
+      }
+
+      .flipped {
+        transform: rotate(180deg);
+      }
+
+      .square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .square.light {
+        background-color: #f0d9b5;
+      }
+
+      .square.dark {
+        background-color: #b58863;
+      }
+
+      .piece {
+        font-size: 36px;
+        cursor: pointer;
+      }
+
+      .piece.draggable {
+        cursor: grab;
+      }
+
+      .dragging {
+        opacity: 0.5;
+      }
+
+      /* Rotate pieces for black player */
+      .flipped .piece {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white font-sans">
+    <div class="min-h-screen flex flex-col items-center justify-between py-4">
+      <header class="w-full text-center pb-2">
+        <h1
+          class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
+        >
+          Chess Game
+        </h1>
+      </header>
+
+      <main class="flex flex-col items-center gap-6 w-full max-w-4xl px-4">
+        <!-- Responsive Board Container -->
+        <div class="w-full max-w-[500px] aspect-square rounded-xl shadow-xl">
+          <div
+            id="board"
+            class="chessboard w-full h-full rounded-md overflow-hidden bg-zinc-800"
+          ></div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 w-full justify-center px-4">
+          <button
+            id="startBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
+          >
+            Start Game
+          </button>
+          <button
+            id="resetBtn"
+            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
+          >
+            Reset Game
+          </button>
+          <button
+            id="joinBtn"
+            class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
+          >
+            Join as Spectator
+          </button>
+        </div>
+      </main>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+      integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"
+      integrity="sha512-xRllwz2gdZciIB+AkEbeq+gVhX8VB8XsfqeFbUh+SzHlN96dEduwtTuVuc2u9EROlmW9+yhRlxjif66ORpsgVA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="/js/chessgame.js"></script>
+  </body>
+</html>

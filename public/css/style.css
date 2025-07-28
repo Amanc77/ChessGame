@@ -1,0 +1,67 @@
+body {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXaNUIUFjDO58F_249HQHA4Xj8TsKyMEeU0GxmUaS4WSXt21pN");
+}
+
+/* Chessboard container */
+
+.chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  transform: rotate(0deg);
+  background-color: #a67c52; /* fallback color */
+  background-image: url("/images/boards/dark_wood.png");
+  background-size: cover;
+}
+
+/* Flip board for black player */
+.chessboard.flipped {
+  transform: rotate(180deg);
+}
+
+.chessboard.flipped .piece {
+  transform: rotate(-180deg);
+}
+
+/* Individual squares */
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wood-like square colors
+.square.light {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcrAINOsHxab3WIIacT9ZZ11hskcyCheIM1IIHTo_cKX_F4QQw");
+}
+
+.square.dark {
+  background-color: #b58863;
+} */
+
+/* Piece styles */
+.piece {
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/* Draggable style */
+.piece.draggable {
+  cursor: grab;
+}
+
+/* While dragging */
+.dragging {
+  opacity: 0.5;
+}
+
+/* White pieces with shadow for contrast */
+.piece.white {
+  color: white;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 1));
+}
+
+/* Black pieces */
+.piece.black {
+  color: black;
+}

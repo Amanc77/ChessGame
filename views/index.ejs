@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chess.com</title>
+    <link rel="stylesheet" href="/css/style.css" />
     <!-- Light mode favicon -->
     <link
       rel="icon"
@@ -21,72 +22,16 @@
     />
 
     <!-- Default favicon for older browsers -->
-    <link rel="icon" href="../chess.png" type="image/x-icon" />
+    <link rel="icon" href="/images/chess.png" type="image/x-icon" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-      .chessboard {
-        display: grid;
-        grid-template-columns: repeat(8, minmax(0, 1fr));
-        grid-template-rows: repeat(8, minmax(0, 1fr));
-        width: 400px;
-        height: 400px;
-        transform: rotate(0deg);
-      }
-
-      .piece.white {
-        color: white;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 1));
-      }
-
-      .piece.black {
-        color: black;
-      }
-
-      .flipped {
-        transform: rotate(180deg);
-      }
-
-      .square {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .square.light {
-        background-color: #f0d9b5;
-      }
-
-      .square.dark {
-        background-color: #b58863;
-      }
-
-      .piece {
-        font-size: 36px;
-        cursor: pointer;
-      }
-
-      .piece.draggable {
-        cursor: grab;
-      }
-
-      .dragging {
-        opacity: 0.5;
-      }
-
-      /* Rotate pieces for black player */
-      .flipped .piece {
-        transform: rotate(180deg);
-      }
-    </style>
   </head>
 
   <body class="bg-gray-900 text-white font-sans">
     <div class="min-h-screen flex flex-col items-center justify-between py-4">
       <header class="w-full text-center pb-2">
         <h1
-          class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight"
         >
           Chess Game
         </h1>
@@ -103,24 +48,24 @@
 
         <!-- Buttons -->
         <div class="flex flex-col sm:flex-row gap-3 w-full justify-center px-4">
-          <button
+          <!-- <button
             id="startBtn"
             class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
           >
             Start Game
-          </button>
+          </button> -->
           <button
             id="resetBtn"
             class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
           >
             Reset Game
           </button>
-          <button
+          <!-- <button
             id="joinBtn"
             class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full sm:w-auto"
           >
             Join as Spectator
-          </button>
+          </button> -->
         </div>
       </main>
     </div>

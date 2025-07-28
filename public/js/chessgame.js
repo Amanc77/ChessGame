@@ -25,22 +25,15 @@ const renderBoard = () => {
   const board = chess.board();
   boardElement.innerHTML = "";
 
-  const displayRows = playerRole === "b" ? [...board].reverse() : board;
-
-  displayRows.forEach((row, rowIndex) => {
-    const displayCols = playerRole === "b" ? [...row].reverse() : row;
-
-    displayCols.forEach((square, colIndex) => {
-      const actualRow = playerRole === "b" ? 7 - rowIndex : rowIndex;
-      const actualCol = playerRole === "b" ? 7 - colIndex : colIndex;
-
+  board.forEach((row, rowIndex) => {
+    row.forEach((square, colIndex) => {
       const squareElement = document.createElement("div");
       squareElement.classList.add(
         "square",
-        (actualRow + actualCol) % 2 === 0 ? "light" : "dark"
+        (rowIndex + colIndex) % 2 === 0 ? "light" : "dark"
       );
-      squareElement.dataset.row = actualRow;
-      squareElement.dataset.col = actualCol;
+      squareElement.dataset.row = rowIndex;
+      squareElement.dataset.col = colIndex;
 
       if (square) {
         const pieceElement = document.createElement("div");
@@ -71,7 +64,7 @@ const renderBoard = () => {
         pieceElement.addEventListener("dragstart", (e) => {
           if (pieceElement.draggable) {
             draggedPiece = pieceElement;
-            sourceSquare = { row: actualRow, col: actualCol };
+            sourceSquare = { row: rowIndex, col: colIndex };
             e.dataTransfer.setData("text/plain", "");
           }
         });
@@ -120,21 +113,62 @@ const handleMove = (source, target) => {
 
 socket.on("playerRole", (role) => {
   playerRole = role;
+  console.log("I got role:", role);
   renderBoard();
 });
 
-socket.on("spectatorRole", () => {
-  playerRole = null;
-  renderBoard();
-});
+// socket.on("spectatorRole", () => {
+//   playerRole = null;
+//   console.log("I'm a spectator");
+//   renderBoard();
+// });
 
 socket.on("boardState", (fen) => {
   chess.load(fen || undefined);
+  console.log("Loaded FEN:", fen);
   renderBoard();
+  checkGameStatus();
 });
 
 socket.on("move", (move) => {
-  chess.move(move);
+  console.log("Received move:", move);
+  const result = chess.move(move);
+  console.log("Move result:", result);
+  renderBoard();
+  checkGameStatus();
+});
+
+const checkGameStatus = () => {
+  if (chess.game_over()) {
+    console.log("Game is over. Checking status...");
+    if (chess.in_checkmate()) {
+      const winner = chess.turn() === "w" ? "Black" : "White";
+      console.log("Checkmate detected. Winner:", winner);
+      setTimeout(() => {
+        alert(`${winner} wins by checkmate!`);
+      }, 100);
+    } else if (chess.in_draw()) {
+      console.log("Draw detected");
+      setTimeout(() => {
+        alert("Game ends in a draw!");
+      }, 100);
+    } else if (chess.in_stalemate()) {
+      console.log("Stalemate detected");
+      setTimeout(() => {
+        alert("Game ends in a stalemate!");
+      }, 100);
+    }
+  }
+};
+
+const resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", () => {
+  socket.emit("reset-game");
+});
+
+socket.on("reset-game", () => {
+  chess.reset();
+  console.log("Game reset");
   renderBoard();
 });
 

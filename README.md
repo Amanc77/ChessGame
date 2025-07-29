@@ -10,6 +10,25 @@ A real-time multiplayer chess game built using **HTML**, **CSS**, **JavaScript**
 
 ---
 
+## 🎮 How to Play
+
+### 👥 Play with Two Players
+
+Open the live game link:  
+[https://symplechessgame.onrender.com](https://symplechessgame.onrender.com)
+
+- The **first browser tab** to open the link will be assigned **White** pieces.
+- The **second tab** or a new device opening the same link will be assigned **Black** pieces.
+
+- Move pieces by **drag and drop**.
+- The board will update in **real-time** for both players.
+- Use the **Reset Game** button to restart the game anytime.
+
+> ⚠️ Keep both tabs/windows open to simulate multiplayer mode.  
+> You can also share the live link with a friend to play remotely.
+
+---
+
 ## 🧩 Features
 
 - 🔁 Real-time multiplayer gameplay using **Socket.IO**
